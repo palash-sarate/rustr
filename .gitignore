@@ -2,6 +2,10 @@
 target/
 **/*.rs.bk
 
+# Release artifacts
+release/
+*.zip
+
 # IDE and OS files
 .idea/
 .vscode/

@@ -1,0 +1,61 @@
+name: Build and Release Rust Utilities
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release for ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+            artifact_name: rcat-linux-x86_64, rls-linux-x86_64
+          - target: x86_64-apple-darwin
+            os: macos-latest
+            artifact_name: rcat-macos-x86_64, rls-macos-x86_64
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            artifact_name: rcat-windows-x86_64.exe, rls-windows-x86_64.exe
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Build rcat & rls
+        working-directory: rust-utils
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Prepare Artifacts (Linux & macOS)
+        if: matrix.os != 'windows-latest'
+        run: |
+          mkdir -p dist
+          cp rust-utils/target/${{ matrix.target }}/release/rcat dist/rcat-${{ matrix.target }}
+          cp rust-utils/target/${{ matrix.target }}/release/rls dist/rls-${{ matrix.target }}
+
+      - name: Prepare Artifacts (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          mkdir dist
+          copy rust-utils\target\${{ matrix.target }}\release\rcat.exe dist\rcat-${{ matrix.target }}.exe
+          copy rust-utils\target\${{ matrix.target }}\release\rls.exe dist\rls-${{ matrix.target }}.exe
+
+      - name: Upload binaries to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
