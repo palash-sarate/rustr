@@ -41,6 +41,23 @@ Extracts and prints specific columns from input lines.
 
 ---
 
+## Installation
+
+### Method 1: Cargo Install (Recommended for Rust users)
+You can build and install all utilities directly from source using cargo:
+```sh
+cargo install --git https://github.com/palash-sarate/rustr.git
+```
+*Note: Make sure `~/.cargo/bin` is in your system `PATH` env variable.*
+
+### Method 2: Direct Binary Download
+1. Head over to the [Releases](https://github.com/palash-sarate/rustr/releases) page.
+2. Download the binary corresponding to your target platform.
+3. Make the binary executable (on Unix-like systems: `chmod +x <binary-name>`).
+4. Move the binary into your system `PATH` directory (e.g. `/usr/local/bin`) to run it from anywhere.
+
+---
+
 ## Build & Release
 
 ### Local Compilation
