@@ -1,0 +1,13 @@
+[package]
+name = "rust-utils"
+version = "0.1.0"
+edition = "2021"
+description = "Fast, memory-safe CLI utilities rcat and rls written in Rust"
+
+[[bin]]
+name = "rcat"
+path = "src/bin/rcat.rs"
+
+[[bin]]
+name = "rls"
+path = "src/bin/rls.rs"
