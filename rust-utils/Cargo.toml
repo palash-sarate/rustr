@@ -2,7 +2,7 @@
 name = "rust-utils"
 version = "0.1.0"
 edition = "2021"
-description = "Fast, memory-safe CLI utilities rcat and rls written in Rust"
+description = "Fast, memory-safe CLI utilities (rcat, rls, rgrep, rfind, rfzf, rdu, rsed, rawk) written in Rust"
 
 [[bin]]
 name = "rcat"
@@ -11,3 +11,27 @@ path = "src/bin/rcat.rs"
 [[bin]]
 name = "rls"
 path = "src/bin/rls.rs"
+
+[[bin]]
+name = "rgrep"
+path = "src/bin/rgrep.rs"
+
+[[bin]]
+name = "rfind"
+path = "src/bin/rfind.rs"
+
+[[bin]]
+name = "rfzf"
+path = "src/bin/rfzf.rs"
+
+[[bin]]
+name = "rdu"
+path = "src/bin/rdu.rs"
+
+[[bin]]
+name = "rsed"
+path = "src/bin/rsed.rs"
+
+[[bin]]
+name = "rawk"
+path = "src/bin/rawk.rs"

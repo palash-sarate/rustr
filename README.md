@@ -7,24 +7,37 @@ Fast, memory-safe CLI utilities written in Rust. This repository contains custom
 ### 1. `rcat`
 A lightweight replacement for the standard `cat` command, optimized for reading and printing file contents.
 
-- **Usage**:
-  ```sh
-  rcat <file_path>
-  ```
-- **Features**:
-  - Validates command line arguments.
-  - Safe error handling for missing or unreadable files.
+- Usage: `rcat <file_path>`
+- Features: Validates command line arguments; safe error handling.
 
 ### 2. `rls`
 A clean utility for listing directory contents.
+- Usage: `rls [directory_path]` (defaults to `.`)
 
-- **Usage**:
-  ```sh
-  rls [directory_path]
-  ```
-- **Features**:
-  - Lists all files and directories in the target path.
-  - Defaults to the current directory (`.`) if no path is provided.
+### 3. `rgrep`
+A recursive pattern matcher for finding text within files.
+- Usage: `rgrep <pattern> [path]` (defaults to `.`)
+
+### 4. `rfind`
+Searches a directory recursively for files or folders matching a query string.
+- Usage: `rfind <query> [path]` (defaults to `.`)
+
+### 5. `rfzf`
+A fast CLI line-stream filter with fuzzy-matching logic.
+- Usage: `<command> | rfzf <query>`  *or*  `rfzf <query> [file]`
+
+### 6. `rdu`
+Calculates recursive disk usage of a directory showing human-readable sizes (KB, MB, GB).
+- Usage: `rdu [path]` (defaults to `.`)
+
+### 7. `rsed`
+Stream editor for replacing occurrences of a search pattern.
+- Usage: `<command> | rsed <find> <replace>`  *or*  `rsed <find> <replace> [file]`
+
+### 8. `rawk`
+Extracts and prints specific columns from input lines.
+- Usage: `<command> | rawk <cols> [delimiter] [file]` (where `cols` is comma-separated list of 1-based index numbers)
+- Example: `rawk 1,3 "," data.csv`
 
 ---
 
@@ -38,7 +51,7 @@ To compile the utilities locally:
    ```sh
    cargo build --release
    ```
-3. The compiled binaries will be located under `target/release/rcat.exe` and `target/release/rls.exe` (on Windows).
+3. The compiled binaries (`rcat.exe`, `rls.exe`, `rgrep.exe`, `rfind.exe`, `rfzf.exe`, `rdu.exe`, `rsed.exe`, `rawk.exe`) will be located under `target/release/` (on Windows).
 
 ### CI/CD Releases
 This repository uses a GitHub Actions workflow to automatically build and release binaries for multiple platforms (Linux, macOS, Windows) when a new version tag is pushed:
